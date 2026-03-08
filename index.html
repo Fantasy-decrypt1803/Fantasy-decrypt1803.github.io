@@ -3,876 +3,1279 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Gavrish B — Data Analyst Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<title>Gavrish B — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@300;400;500;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-  /* ── Reset & Base ─────────────────────────────────────── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg:        #080C12;
-    --surface:   #0E1420;
-    --surface2:  #141C2E;
-    --border:    #1E2D45;
-    --accent:    #00D4FF;
-    --accent2:   #FF6B35;
-    --gold:      #FFB547;
-    --text:      #E8EEF8;
-    --muted:     #5A7090;
-    --green:     #00E5A0;
-    --red:       #FF4560;
-    --font-head: 'Syne', sans-serif;
-    --font-mono: 'DM Mono', monospace;
-    --font-body: 'DM Sans', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size: 15px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* ── Noise overlay ────────────────────────────────────── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0; z-index: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-  }
-
-  /* ── Grid background ──────────────────────────────────── */
-  body::after {
-    content: '';
-    position: fixed; inset: 0; z-index: 0;
-    background-image:
-      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
-    background-size: 48px 48px;
-    pointer-events: none;
-  }
-
-  /* ── Layout ───────────────────────────────────────────── */
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
-
-  /* ── Nav ──────────────────────────────────────────────── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 16px 0;
-    background: rgba(8,12,18,0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    max-width: 1100px; margin: 0 auto; padding: 0 32px;
-  }
-
-  .nav-logo {
-    font-family: var(--font-head);
-    font-size: 18px; font-weight: 800;
-    letter-spacing: -0.5px;
-    color: var(--text);
-  }
-
-  .nav-logo span { color: var(--accent); }
-
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-
-  .nav-links a {
-    font-family: var(--font-mono);
-    font-size: 12px; letter-spacing: 0.08em;
-    text-transform: uppercase; text-decoration: none;
-    color: var(--muted); transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--accent); }
-
-  .nav-status {
-    display: flex; align-items: center; gap: 8px;
-    font-family: var(--font-mono); font-size: 11px;
-    color: var(--green);
-  }
-
-  .status-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 8px var(--green);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.4; }
-  }
-
-  /* ── Hero ─────────────────────────────────────────────── */
-  .hero {
-    padding: 160px 0 100px;
-    position: relative; overflow: hidden;
-  }
-
-  .hero-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--accent);
-    margin-bottom: 20px;
-    display: flex; align-items: center; gap: 12px;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    display: block; width: 32px; height: 1px;
-    background: var(--accent);
-  }
-
-  .hero-name {
-    font-family: var(--font-head);
-    font-size: clamp(52px, 8vw, 96px);
-    font-weight: 800;
-    line-height: 0.92;
-    letter-spacing: -3px;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-
-  .hero-name .accent-line {
-    display: block;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--green) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-
-  .hero-title {
-    font-family: var(--font-head);
-    font-size: clamp(20px, 3vw, 32px);
-    font-weight: 400; color: var(--muted);
-    letter-spacing: -0.5px;
-    margin-bottom: 40px;
-  }
-
-  .hero-desc {
-    max-width: 520px;
-    font-size: 16px; color: var(--muted);
-    line-height: 1.7; margin-bottom: 48px;
-  }
-
-  .hero-cta {
-    display: flex; gap: 16px; flex-wrap: wrap;
-  }
-
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 28px;
-    font-family: var(--font-mono); font-size: 12px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none; border-radius: 3px;
-    transition: all 0.2s; cursor: pointer;
-  }
-
-  .btn-primary {
-    background: var(--accent); color: var(--bg);
-    font-weight: 600;
-  }
-
-  .btn-primary:hover {
-    background: #fff; transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0,212,255,0.3);
-  }
-
-  .btn-outline {
-    background: transparent; color: var(--text);
-    border: 1px solid var(--border);
-  }
-
-  .btn-outline:hover {
-    border-color: var(--accent); color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  /* ── Ticker tape ──────────────────────────────────────── */
-  .ticker {
-    padding: 14px 0;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    overflow: hidden; white-space: nowrap;
-    position: relative; z-index: 1;
-  }
-
-  .ticker-inner {
-    display: inline-flex; gap: 48px;
-    animation: scroll-left 25s linear infinite;
-  }
-
-  .ticker-item {
-    font-family: var(--font-mono); font-size: 12px;
-    color: var(--muted); display: flex; align-items: center; gap: 8px;
-  }
-
-  .ticker-item .sym { color: var(--text); font-weight: 400; }
-  .ticker-item .up  { color: var(--green); }
-  .ticker-item .dn  { color: var(--red); }
-
-  @keyframes scroll-left {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* ── Section base ─────────────────────────────────────── */
-  section { padding: 96px 0; }
-
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 11px; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--accent);
-    margin-bottom: 12px;
-    display: flex; align-items: center; gap: 12px;
-  }
-
-  .section-label::after {
-    content: ''; flex: 1; height: 1px;
-    background: linear-gradient(to right, var(--border), transparent);
-  }
-
-  .section-title {
-    font-family: var(--font-head);
-    font-size: clamp(32px, 5vw, 52px);
-    font-weight: 800; letter-spacing: -1.5px;
-    color: var(--text); margin-bottom: 16px;
-  }
-
-  .section-sub {
-    color: var(--muted); font-size: 16px;
-    max-width: 500px; margin-bottom: 64px;
-  }
-
-  /* ── GitHub stats bar ─────────────────────────────────── */
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 8px; overflow: hidden;
-    margin-bottom: 64px;
-  }
-
-  .stat-cell {
-    background: var(--surface);
-    padding: 28px 24px;
-    text-align: center;
-    transition: background 0.2s;
-  }
-
-  .stat-cell:hover { background: var(--surface2); }
-
-  .stat-num {
-    font-family: var(--font-head);
-    font-size: 40px; font-weight: 800;
-    letter-spacing: -2px;
-    background: linear-gradient(135deg, var(--accent), var(--green));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    display: block;
-  }
-
-  .stat-label {
-    font-family: var(--font-mono);
-    font-size: 11px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--muted);
-    margin-top: 4px; display: block;
-  }
-
-  /* ── Project cards ────────────────────────────────────── */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden;
-  }
-
-  .project-card {
-    background: var(--surface);
-    padding: 40px;
-    position: relative; overflow: hidden;
-    transition: background 0.25s;
-    text-decoration: none; color: inherit;
-    display: block;
-  }
-
-  .project-card:hover { background: var(--surface2); }
-
-  .project-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), transparent);
-    opacity: 0; transition: opacity 0.25s;
-  }
-
-  .project-card:hover::before { opacity: 1; }
-
-  .project-num {
-    font-family: var(--font-mono);
-    font-size: 11px; letter-spacing: 0.15em;
-    color: var(--muted); margin-bottom: 20px;
-    display: flex; align-items: center; gap: 12px;
-  }
-
-  .project-badge {
-    padding: 3px 10px;
-    background: rgba(0,212,255,0.08);
-    border: 1px solid rgba(0,212,255,0.2);
-    border-radius: 20px;
-    font-family: var(--font-mono); font-size: 10px;
-    letter-spacing: 0.08em; color: var(--accent);
-  }
-
-  .badge-green {
-    background: rgba(0,229,160,0.08);
-    border-color: rgba(0,229,160,0.2);
-    color: var(--green);
-  }
-
-  .badge-gold {
-    background: rgba(255,181,71,0.08);
-    border-color: rgba(255,181,71,0.2);
-    color: var(--gold);
-  }
-
-  .project-title {
-    font-family: var(--font-head);
-    font-size: 22px; font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--text); margin-bottom: 12px;
-    line-height: 1.2;
-  }
-
-  .project-desc {
-    font-size: 14px; color: var(--muted);
-    line-height: 1.6; margin-bottom: 28px;
-  }
-
-  .project-tags {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    margin-bottom: 28px;
-  }
-
-  .tag {
-    padding: 4px 10px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    font-family: var(--font-mono); font-size: 10px;
-    letter-spacing: 0.05em; color: var(--muted);
-  }
-
-  .project-meta {
-    display: flex; align-items: center; gap: 20px;
-    font-family: var(--font-mono); font-size: 11px;
-    color: var(--muted);
-  }
-
-  .project-meta span { display: flex; align-items: center; gap: 5px; }
-
-  .project-arrow {
-    position: absolute; bottom: 40px; right: 40px;
-    font-size: 20px; color: var(--border);
-    transition: all 0.25s;
-  }
-
-  .project-card:hover .project-arrow {
-    color: var(--accent); transform: translate(4px, -4px);
-  }
-
-  /* ── Skills section ───────────────────────────────────── */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden;
-  }
-
-  .skill-group {
-    background: var(--surface);
-    padding: 36px 32px;
-  }
-
-  .skill-group-title {
-    font-family: var(--font-mono);
-    font-size: 11px; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--accent);
-    margin-bottom: 20px;
-    display: flex; align-items: center; gap: 8px;
-  }
-
-  .skill-group-title::before {
-    content: ''; width: 16px; height: 1px;
-    background: var(--accent);
-  }
-
-  .skill-item {
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 14px;
-  }
-
-  .skill-name {
-    font-size: 13px; color: var(--text);
-    flex: 1;
-  }
-
-  .skill-bar-wrap {
-    width: 80px; height: 3px;
-    background: var(--border); border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .skill-bar {
-    height: 100%; border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--green));
-    animation: grow-bar 1.2s ease-out forwards;
-    transform-origin: left;
-  }
-
-  @keyframes grow-bar {
-    from { transform: scaleX(0); }
-    to   { transform: scaleX(1); }
-  }
-
-  /* ── Certifications ───────────────────────────────────── */
-  .certs-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden;
-    margin-top: 2px;
-  }
-
-  .cert-card {
-    background: var(--surface);
-    padding: 28px 32px;
-    display: flex; align-items: center; gap: 20px;
-    transition: background 0.2s;
-  }
-
-  .cert-card:hover { background: var(--surface2); }
-
-  .cert-icon {
-    width: 44px; height: 44px;
-    background: linear-gradient(135deg, var(--surface2), var(--border));
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-  }
-
-  .cert-name {
-    font-family: var(--font-head);
-    font-size: 14px; font-weight: 600;
-    color: var(--text); margin-bottom: 2px;
-  }
-
-  .cert-meta {
-    font-family: var(--font-mono);
-    font-size: 11px; color: var(--muted);
-  }
-
-  /* ── Contact ──────────────────────────────────────────── */
-  .contact-section {
-    padding: 96px 0;
-    border-top: 1px solid var(--border);
-    text-align: center;
-  }
-
-  .contact-big {
-    font-family: var(--font-head);
-    font-size: clamp(36px, 6vw, 72px);
-    font-weight: 800; letter-spacing: -2px;
-    color: var(--text); margin-bottom: 24px;
-    line-height: 1;
-  }
-
-  .contact-big .dim { color: var(--muted); }
-
-  .contact-links {
-    display: flex; justify-content: center;
-    gap: 16px; flex-wrap: wrap; margin-top: 40px;
-  }
-
-  /* ── Footer ───────────────────────────────────────────── */
-  footer {
-    padding: 32px 0;
-    border-top: 1px solid var(--border);
-    position: relative; z-index: 1;
-  }
-
-  .footer-inner {
-    display: flex; align-items: center; justify-content: space-between;
-  }
-
-  .footer-copy {
-    font-family: var(--font-mono); font-size: 11px;
-    color: var(--muted);
-  }
-
-  /* ── Loading state ────────────────────────────────────── */
-  .loading-shimmer {
-    background: linear-gradient(90deg,
-      var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
-    background-size: 400% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 4px;
-  }
-
-  @keyframes shimmer {
-    0%   { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-
-  /* ── Scroll reveal ────────────────────────────────────── */
-  .reveal {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1; transform: translateY(0);
-  }
-
-  /* ── Responsive ───────────────────────────────────────── */
-  @media (max-width: 768px) {
-    .projects-grid, .skills-grid, .certs-row { grid-template-columns: 1fr; }
-    .stats-bar { grid-template-columns: repeat(2, 1fr); }
-    .nav-links { display: none; }
-  }
+
+/* ── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── Theme variables — change per section ──────────────── */
+:root {
+  --bg:       #05080F;
+  --surface:  #0B1120;
+  --border:   #162035;
+  --accent:   #4FFFD4;
+  --accent2:  #FF6B6B;
+  --accent3:  #FFD93D;
+  --text:     #EDF2FF;
+  --muted:    #4A6080;
+  --fhead:    "Cabinet Grotesk", sans-serif;
+  --fmono:    "JetBrains Mono", monospace;
+  --fbody:    "Cabinet Grotesk", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--fbody);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Custom cursor ─────────────────────────────────────── */
+.cursor-dot {
+  position: fixed; z-index: 9999; pointer-events: none;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s;
+  box-shadow: 0 0 12px var(--accent);
+}
+.cursor-ring {
+  position: fixed; z-index: 9998; pointer-events: none;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(79,255,212,0.4);
+  transform: translate(-50%,-50%);
+  transition: transform 0.15s ease, width 0.3s, height 0.3s, opacity 0.3s;
+}
+body:hover .cursor-dot { transform: translate(-50%,-50%) scale(1); }
+
+/* ── Noise overlay ─────────────────────────────────────── */
+#noise {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Nav ───────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  padding: 0 60px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(5,8,15,0.8);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s;
+}
+
+.nav-logo {
+  font-family: var(--fmono);
+  font-size: 13px; letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex; gap: 0; list-style: none;
+}
+
+.nav-links li a {
+  display: block;
+  padding: 0 24px; height: 64px; line-height: 64px;
+  font-family: var(--fmono); font-size: 11px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  text-decoration: none; color: var(--muted);
+  position: relative; transition: color 0.25s;
+}
+
+.nav-links li a::after {
+  content: ''; position: absolute; bottom: 0; left: 24px; right: 24px;
+  height: 2px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.nav-links li a:hover,
+.nav-links li a.active { color: var(--text); }
+.nav-links li a:hover::after,
+.nav-links li a.active::after { transform: scaleX(1); }
+
+/* ── Section base ──────────────────────────────────────── */
+.section {
+  min-height: 100vh;
+  padding: 120px 60px 80px;
+  position: relative;
+  transition: background 0.8s ease;
+}
+
+/* Section backgrounds — the magic colour shift */
+#about    { background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(79,255,212,0.06) 0%, transparent 70%), var(--bg); }
+#skills   { background: radial-gradient(ellipse 80% 60% at 30% 50%, rgba(99,102,241,0.08) 0%, transparent 70%), #060A14; }
+#projects { background: radial-gradient(ellipse 80% 60% at 70% 30%, rgba(255,109,61,0.07) 0%, transparent 70%), #070B16; }
+#experience { background: radial-gradient(ellipse 80% 60% at 40% 60%, rgba(255,217,61,0.06) 0%, transparent 70%), #060910; }
+#contact  { background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(79,255,212,0.08) 0%, transparent 70%), #050810; }
+
+.container { max-width: 1100px; margin: 0 auto; }
+
+/* ── Section headings ──────────────────────────────────── */
+.sec-label {
+  font-family: var(--fmono); font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 12px;
+}
+.sec-label::before { content: '//'; opacity: 0.5; }
+
+.sec-title {
+  font-family: var(--fhead);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800; letter-spacing: -2px;
+  color: var(--text); margin-bottom: 60px;
+  line-height: 1;
+}
+
+.sec-title em {
+  font-style: normal;
+  -webkit-text-stroke: 1px var(--accent);
+  color: transparent;
+}
+
+/* ── ABOUT ─────────────────────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 80px; align-items: start;
+}
+
+.about-photo-wrap {
+  position: relative;
+}
+
+.about-photo-frame {
+  position: relative; width: 280px; height: 340px;
+}
+
+.about-photo-frame::before {
+  content: '';
+  position: absolute; inset: -12px;
+  border: 1px solid var(--accent);
+  border-radius: 4px; opacity: 0.3;
+  animation: frame-pulse 3s ease-in-out infinite;
+}
+
+.about-photo-frame::after {
+  content: '';
+  position: absolute; top: 16px; left: 16px; right: -16px; bottom: -16px;
+  background: linear-gradient(135deg, rgba(79,255,212,0.15), transparent);
+  border-radius: 4px; z-index: 0;
+}
+
+@keyframes frame-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.01); }
+}
+
+.about-photo {
+  width: 280px; height: 340px;
+  object-fit: cover; object-position: center top;
+  border-radius: 4px;
+  position: relative; z-index: 1;
+  filter: grayscale(20%) contrast(1.05);
+  transition: filter 0.4s;
+}
+
+.about-photo:hover { filter: grayscale(0%) contrast(1.1); }
+
+.about-tag {
+  position: absolute; bottom: -20px; right: -20px; z-index: 2;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 12px 16px; border-radius: 4px;
+}
+
+.about-tag-val {
+  font-family: var(--fhead); font-size: 20px; font-weight: 800;
+  color: var(--accent); display: block;
+}
+
+.about-tag-key {
+  font-family: var(--fmono); font-size: 10px;
+  letter-spacing: 0.1em; color: var(--muted);
+}
+
+.about-content { padding-top: 8px; }
+
+.about-intro {
+  font-size: 20px; font-weight: 500;
+  color: var(--text); line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.about-intro span { color: var(--accent); }
+
+.about-body {
+  font-size: 15px; color: var(--muted);
+  line-height: 1.8; margin-bottom: 40px;
+}
+
+.about-chips {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 40px;
+}
+
+.chip {
+  padding: 6px 16px;
+  background: rgba(79,255,212,0.06);
+  border: 1px solid rgba(79,255,212,0.2);
+  border-radius: 100px;
+  font-family: var(--fmono); font-size: 11px;
+  letter-spacing: 0.05em; color: var(--accent);
+}
+
+.about-links { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ── Buttons ───────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 26px; border-radius: 3px;
+  font-family: var(--fmono); font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; transition: all 0.25s; cursor: none;
+  border: none;
+}
+
+.btn-glow {
+  background: var(--accent); color: var(--bg); font-weight: 700;
+}
+.btn-glow:hover {
+  box-shadow: 0 0 32px rgba(79,255,212,0.5);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover {
+  border-color: var(--accent); color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ── SKILLS ────────────────────────────────────────────── */
+.skills-tabs {
+  display: flex; gap: 0; margin-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-tab {
+  padding: 12px 28px;
+  font-family: var(--fmono); font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); cursor: none;
+  position: relative; transition: color 0.2s;
+  background: transparent; border: none;
+}
+
+.skill-tab::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 2px; background: var(--accent);
+  transform: scaleX(0); transition: transform 0.3s;
+}
+
+.skill-tab.active { color: var(--text); }
+.skill-tab.active::after { transform: scaleX(1); }
+
+.skill-panel { display: none; }
+.skill-panel.active { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 28px 24px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.skill-card:hover { border-color: rgba(79,255,212,0.3); transform: translateY(-3px); }
+
+.skill-card-icon { font-size: 28px; margin-bottom: 14px; }
+
+.skill-card-name {
+  font-family: var(--fhead); font-size: 15px; font-weight: 700;
+  color: var(--text); margin-bottom: 8px;
+}
+
+.skill-card-level {
+  height: 3px; background: var(--border); border-radius: 2px;
+  margin-bottom: 12px; overflow: hidden;
+}
+
+.skill-card-bar {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), #6366F1);
+  animation: bar-grow 1s ease-out forwards;
+  transform-origin: left; transform: scaleX(0);
+}
+
+@keyframes bar-grow { to { transform: scaleX(1); } }
+
+.skill-card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-tag {
+  font-family: var(--fmono); font-size: 10px;
+  color: var(--muted); padding: 3px 8px;
+  border: 1px solid var(--border); border-radius: 2px;
+}
+
+/* Certifications */
+.certs-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  margin-top: 48px;
+}
+
+.cert-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 24px 28px;
+  display: flex; align-items: center; gap: 16px;
+  text-decoration: none; color: inherit;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.cert-card:hover { border-color: var(--accent3); transform: translateY(-3px); }
+
+.cert-icon-wrap {
+  width: 48px; height: 48px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+  background: rgba(255,217,61,0.08);
+  border: 1px solid rgba(255,217,61,0.2);
+}
+
+.cert-name {
+  font-family: var(--fhead); font-size: 13px; font-weight: 700;
+  color: var(--text); margin-bottom: 3px;
+}
+.cert-meta { font-family: var(--fmono); font-size: 10px; color: var(--muted); }
+.cert-link-icon { margin-left: auto; color: var(--accent3); font-size: 14px; }
+
+/* ── PROJECTS ──────────────────────────────────────────── */
+.projects-filter {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 48px;
+}
+
+.filter-btn {
+  padding: 7px 20px; border-radius: 100px;
+  font-family: var(--fmono); font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid var(--border); color: var(--muted);
+  background: transparent; cursor: none;
+  transition: all 0.2s;
+}
+.filter-btn.active, .filter-btn:hover {
+  border-color: var(--accent2); color: var(--accent2);
+  background: rgba(255,107,107,0.08);
+}
+
+.projects-list { display: flex; flex-direction: column; gap: 2px; }
+
+.project-row {
+  display: grid; grid-template-columns: 80px 1fr auto;
+  gap: 32px; align-items: center;
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 28px 36px;
+  text-decoration: none; color: inherit;
+  transition: border-color 0.25s, transform 0.2s;
+  position: relative; overflow: hidden;
+}
+
+.project-row::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--accent2);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.3s;
+}
+
+.project-row:hover { border-color: rgba(255,107,107,0.3); transform: translateX(6px); }
+.project-row:hover::before { transform: scaleY(1); }
+
+.project-num {
+  font-family: var(--fmono); font-size: 28px;
+  font-weight: 300; color: var(--border);
+  letter-spacing: -1px;
+}
+
+.project-row:hover .project-num { color: var(--accent2); }
+
+.project-info {}
+
+.project-title {
+  font-family: var(--fhead); font-size: 18px; font-weight: 700;
+  color: var(--text); margin-bottom: 6px;
+}
+
+.project-desc {
+  font-size: 13px; color: var(--muted); line-height: 1.5;
+  margin-bottom: 12px; max-width: 600px;
+}
+
+.project-stack { display: flex; gap: 8px; flex-wrap: wrap; }
+.project-tag {
+  font-family: var(--fmono); font-size: 10px;
+  padding: 3px 10px; border-radius: 2px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border); color: var(--muted);
+}
+
+.project-badge-wrap { text-align: right; flex-shrink: 0; }
+
+.project-type-badge {
+  display: inline-block; padding: 5px 14px; border-radius: 100px;
+  font-family: var(--fmono); font-size: 10px;
+  letter-spacing: 0.08em; margin-bottom: 12px;
+}
+
+.badge-finance {
+  background: rgba(79,255,212,0.1);
+  border: 1px solid rgba(79,255,212,0.3);
+  color: var(--accent);
+}
+.badge-ml {
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: #818CF8;
+}
+
+.project-arrow {
+  font-size: 18px; color: var(--muted);
+  display: block; margin-top: 6px;
+}
+
+/* ── EXPERIENCE ────────────────────────────────────────── */
+.exp-timeline { position: relative; padding-left: 32px; }
+
+.exp-timeline::before {
+  content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+  width: 1px; background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+.exp-item {
+  position: relative; margin-bottom: 60px;
+}
+
+.exp-dot {
+  position: absolute; left: -36px; top: 8px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent);
+}
+
+.exp-period {
+  font-family: var(--fmono); font-size: 11px;
+  letter-spacing: 0.1em; color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.exp-role {
+  font-family: var(--fhead); font-size: 24px; font-weight: 800;
+  letter-spacing: -0.5px; color: var(--text); margin-bottom: 4px;
+}
+
+.exp-company {
+  font-size: 15px; color: var(--muted); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.exp-company-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent); opacity: 0.5;
+}
+
+.exp-bullets { list-style: none; padding: 0; }
+
+.exp-bullets li {
+  font-size: 14px; color: var(--muted); line-height: 1.6;
+  margin-bottom: 8px; padding-left: 20px; position: relative;
+}
+
+.exp-bullets li::before {
+  content: '→'; position: absolute; left: 0;
+  color: var(--accent); font-family: var(--fmono); font-size: 11px;
+}
+
+.exp-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.exp-tag {
+  font-family: var(--fmono); font-size: 10px;
+  padding: 4px 12px; border-radius: 2px;
+  border: 1px solid var(--border); color: var(--muted);
+}
+
+/* ── CONTACT ───────────────────────────────────────────── */
+.contact-hero {
+  text-align: center; padding: 40px 0 80px;
+}
+
+.contact-big {
+  font-family: var(--fhead);
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 800; letter-spacing: -3px;
+  line-height: 1; margin-bottom: 24px;
+}
+
+.contact-big .stroke {
+  -webkit-text-stroke: 1.5px var(--accent);
+  color: transparent;
+}
+
+.contact-sub {
+  font-size: 16px; color: var(--muted);
+  max-width: 440px; margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+.contact-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; max-width: 760px; margin: 0 auto;
+}
+
+.contact-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 32px 24px; text-align: center;
+  text-decoration: none; color: inherit;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.contact-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+.contact-card-icon { font-size: 28px; margin-bottom: 12px; }
+.contact-card-label {
+  font-family: var(--fmono); font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 6px;
+}
+.contact-card-val {
+  font-family: var(--fhead); font-size: 13px; font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Footer ────────────────────────────────────────────── */
+footer {
+  padding: 32px 60px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 2;
+}
+.footer-copy { font-family: var(--fmono); font-size: 11px; color: var(--muted); }
+
+/* ── Scroll reveal ─────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.up { transform: translateY(30px); }
+.reveal.left { transform: translateX(-30px); }
+.reveal.right { transform: translateX(30px); }
+.reveal.visible { opacity: 1 !important; transform: none !important; }
+
+/* ── Page scroll indicator ─────────────────────────────── */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 600;
+  background: linear-gradient(90deg, var(--accent), #6366F1);
+  transform-origin: left; transform: scaleX(0);
+  transition: transform 0.1s;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo-frame { margin: 0 auto 40px; }
+  .section { padding: 100px 24px 60px; }
+  nav { padding: 0 24px; }
+  .skill-panel.active, .certs-grid, .contact-cards { grid-template-columns: 1fr; }
+  footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+
 </style>
 </head>
 <body>
 
-<!-- ── Nav ─────────────────────────────────────────────────── -->
-<nav>
-  <div class="nav-inner">
-    <div class="nav-logo">GB<span>.</span></div>
-    <ul class="nav-links">
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-status">
-      <span class="status-dot"></span>
-      Open to Work
-    </div>
-  </div>
+<div id="noise"></div>
+<div class="progress-bar" id="progressBar"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ── Nav ──────────────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="nav-logo">GB_portfolio.py</div>
+  <ul class="nav-links">
+    <li><a href="#about"      class="nav-link active">About Me</a></li>
+    <li><a href="#skills"     class="nav-link">Skills</a></li>
+    <li><a href="#projects"   class="nav-link">Projects</a></li>
+    <li><a href="#experience" class="nav-link">Experience</a></li>
+    <li><a href="#contact"    class="nav-link">Contact</a></li>
+  </ul>
 </nav>
 
-<!-- ── Ticker ───────────────────────────────────────────────── -->
-<div class="ticker" style="margin-top:61px;">
-  <div class="ticker-inner" id="tickerInner">
-    <span class="ticker-item"><span class="sym">^GSPC</span><span class="up">▲ 0.82%</span></span>
-    <span class="ticker-item"><span class="sym">^IXIC</span><span class="up">▲ 1.14%</span></span>
-    <span class="ticker-item"><span class="sym">^FTSE</span><span class="dn">▼ 0.21%</span></span>
-    <span class="ticker-item"><span class="sym">GC=F</span><span class="up">▲ 0.43%</span></span>
-    <span class="ticker-item"><span class="sym">BTC-USD</span><span class="up">▲ 2.31%</span></span>
-    <span class="ticker-item"><span class="sym">EUR/USD</span><span class="dn">▼ 0.09%</span></span>
-    <span class="ticker-item"><span class="sym">^TNX</span><span class="up">▲ 0.15%</span></span>
-    <span class="ticker-item"><span class="sym">CL=F</span><span class="dn">▼ 0.55%</span></span>
-    <!-- duplicated for seamless loop -->
-    <span class="ticker-item"><span class="sym">^GSPC</span><span class="up">▲ 0.82%</span></span>
-    <span class="ticker-item"><span class="sym">^IXIC</span><span class="up">▲ 1.14%</span></span>
-    <span class="ticker-item"><span class="sym">^FTSE</span><span class="dn">▼ 0.21%</span></span>
-    <span class="ticker-item"><span class="sym">GC=F</span><span class="up">▲ 0.43%</span></span>
-    <span class="ticker-item"><span class="sym">BTC-USD</span><span class="up">▲ 2.31%</span></span>
-    <span class="ticker-item"><span class="sym">EUR/USD</span><span class="dn">▼ 0.09%</span></span>
-    <span class="ticker-item"><span class="sym">^TNX</span><span class="up">▲ 0.15%</span></span>
-    <span class="ticker-item"><span class="sym">CL=F</span><span class="dn">▼ 0.55%</span></span>
-  </div>
-</div>
-
-<!-- ── Hero ─────────────────────────────────────────────────── -->
-<section class="hero">
+<!-- ════════════════════════════════════════════════════════════
+     ABOUT ME
+════════════════════════════════════════════════════════════ -->
+<section class="section" id="about">
   <div class="container">
-    <p class="hero-eyebrow reveal">Data Analyst · B.Tech AI &amp; ML · VIT Chennai 2025</p>
-    <h1 class="hero-name reveal">
-      Gavrish
-      <span class="accent-line">B.</span>
-    </h1>
-    <p class="hero-title reveal">Turning financial data into decisions.</p>
-    <p class="hero-desc reveal">
-      Data Analyst specialising in financial data pipelines, multi-source reconciliation,
-      and business intelligence. Azure AI certified. Python · SQL · Power BI · MySQL.
-    </p>
-    <div class="hero-cta reveal">
-      <a href="https://github.com/Fantasy-decrypt1803" target="_blank" class="btn btn-primary">
-        ⊹ GitHub Profile
-      </a>
-      <a href="https://linkedin.com/in/gavrish-b-401467218" target="_blank" class="btn btn-outline">
-        LinkedIn →
-      </a>
-      <a href="mailto:gavrish1829@gmail.com" class="btn btn-outline">
-        gavrish1829@gmail.com
-      </a>
+
+    <p class="sec-label reveal">01 — Introduction</p>
+    <h2 class="sec-title reveal">About <em>Me</em></h2>
+
+    <div class="about-grid">
+
+      <!-- Photo -->
+      <div class="about-photo-wrap reveal left">
+        <div class="about-photo-frame">
+          <img src="data:image/jpeg;base64,/9j/4RW3RXhpZgAASUkqAAgAAAASAAABAwABAAAAQBAAAAEBAwABAAAAYBgAAAIBAwADAAAA5gAAAAYBAwABAAAAAgAAAA8BAgAJAAAA7AAAABABAgAFAAAA9QAAABIBAwABAAAAAQAAABUBAwABAAAAAwAAABoBBQABAAAA+gAAABsBBQABAAAAAgEAACgBAwABAAAAAgAAADEBAgAfAAAACgEAADIBAgAUAAAAKQEAADsBAgAAAQAAPQEAABMCAwABAAAAAgAAAJiCAgAAAQAAPQIAAKXEBwBqAAAAPQMAAGmHBAABAAAAqAMAANgHAAAIAAgACABGVUpJRklMTQBYLVQ0AMDGLQAQJwAAwMYtABAnAABBZG9iZSBQaG90b3Nob3AgMjUuMCAoV2luZG93cykAMjAyNTowMTowNCAxNDoxOToyMwAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAAICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgAFByaW50SU0AMDI1MAAAAwACAAEAAAADACIAAAABAQAAAAAJEQAAECcAAAsPAAAQJwAAlwUAABAnAACwCAAAECcAAAEcAAAQJwAAXgIAABAnAACLAAAAECcAAMsDAAAQJwAA5RsAABAnAAAAKwCaggUAAQAAALIFAACdggUAAQAAALoFAAAiiAMAAQAAAAEAAAAniAMAAQAAAMgAAAAwiAMAAQAAAAEAAAAAkAcABAAAADAyMzADkAIAFAAAAMIFAAAEkAIAFAAAANYFAAABkQcABAAAAAECAwACkQUAAQAAAOoFAAABkgoAAQAAAPIFAAACkgUAAQAAAPoFAAADkgoAAQAAAAIGAAAEkgoAAQAAAAoGAAAFkgUAAQAAABIGAAAHkgMAAQAAAAUAAAAIkgMAAQAAAAAAAAAJkgMAAQAAAAAAAAAKkgUAAQAAABoGAACGkgcAAAEAACIGAAAAoAcABAAAADAxMDABoAMAAQAAAAEAAAACoAQAAQAAAIYBAAADoAQAAQAAAPABAAAFoAQAAQAAALgHAAAOogUAAQAAACIHAAAPogUAAQAAACoHAAAQogMAAQAAAAMAAAAXogMAAQAAAAIAAAAAowcAAQAAAAMAAAABowcAAQAAAAEAAAABpAMAAQAAAAAAAAACpAMAAQAAAAEAAAADpAMAAQAAAAEAAAAFpAMAAQAAAFIAAAAGpAMAAQAAAAAAAAAKpAMAAQAAAAIAAAAMpAMAAQAAAAAAAAAxpAIACwAAADIHAAAypAUABAAAAD4HAAAzpAIADQAAAF4HAAA0pAIAQAAAAGwHAAA1pAIACwAAAKwHAAAAAAAACgAAAOIEAAAgAwAAZAAAADIwMjU6MDE6MDQgMTQ6MDQ6MTcAMjAyNTowMTowNCAxNDowNDoxNwAgAAAACgAAALwCAABkAAAAWAIAAGQAAAAsAAAAZAAAAAAAAABkAAAAkAEAAGQAAABKFQAAZAAAAAAAAAAAAAAAICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg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7n61fi7/ALbs/wDSakLq50Lv+27P/Sa8KSSVq+8etVB1d/23Z/6TQ2W1etcZdP6OfZZ2a7/g14WklorV93F1fi7n/R2eA/4NObqvF3/bdn/pNeDpJaK1fdvWqn87/tuz/wBJpm3V66u5/wBHZ/6TXhSSWitX3R19YmC7cef0dmg/zFSNrDlbn7htsDagWPk/o7HWPHs/qs/sf8IvGEktFav/2f/tF45QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAA0RwBWgADGyVHHAIAAAIAABwCUAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAcAjcACDIwMjUwMTA0HAI8AAYxNDA0MTccAnQAgCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgADhCSU0EJQAAAAAAEOAWS2Ah4JwUllwfpPzavF84QklNBDoAAAAAAQkAAAAQAAAAAQAAAAAAC3ByaW50T3V0cHV0AAAABQAAAABQc3RTYm9vbAEAAAAASW50ZWVudW0AAAAASW50ZQAAAABDbHJtAAAAD3ByaW50U2l4dGVlbkJpdGJvb2wAAAAAC3ByaW50ZXJOYW1lVEVYVAAAABMARQBQAFMATwBOACAATAA4ADAANQAwACAAUwBlAHIAaQBlAHMAAAAAAA9wcmludFByb29mU2V0dXBPYmpjAAAADABQAHIAbwBvAGYAIABTAGUAdAB1AHAAAAAAAApwcm9vZlNldHVwAAAAAQAAAABCbHRuZW51bQAAAAxidWlsdGluUHJvb2YAAAAJcHJvb2ZDTVlLADhCSU0EOwAAAAACLQAAABAAAAABAAAAAAAScHJpbnRPdXRwdXRPcHRpb25zAAAAFwAAAABDcHRuYm9vbAAAAAAAQ2xicmJvb2wAAAAAAFJnc01ib29sAAAAAABDcm5DYm9vbAAAAAAAQ250Q2Jvb2wAAAAAAExibHNib29sAAAAAABOZ3R2Ym9vbAAAAAAARW1sRGJvb2wAAAAAAEludHJib29sAAAAAABCY2tnT2JqYwAAAAEAAAAAAABSR0JDAAAAAwAAAABSZCAgZG91YkBv4AAAAAAAAAAAAEdybiBkb3ViQG/gAAAAAAAAAAAAQmwgIGRvdWJAb+AAAAAAAAAAAABCcmRUVW50RiNSbHQAAAAAAAAAAAAAAABCbGQgVW50RiNSbHQAAAAAAAAAAAAAAABSc2x0VW50RiNQeGxAcsAAAAAAAAAAAAp2ZWN0b3JEYXRhYm9vbAEAAAAAUGdQc2VudW0AAAAAUGdQcwAAAABQZ1BDAAAAAExlZnRVbnRGI1JsdAAAAAAAAAAAAAAAAFRvcCBVbnRGI1JsdAAAAAAAAAAAAAAAAFNjbCBVbnRGI1ByY0BZAAAAAAAAAAAAEGNyb3BXaGVuUHJpbnRpbmdib29sAAAAAA5jcm9wUmVjdEJvdHRvbWxvbmcAAAAAAAAADGNyb3BSZWN0TGVmdGxvbmcAAAAAAAAADWNyb3BSZWN0UmlnaHRsb25nAAAAAAAAAAtjcm9wUmVjdFRvcGxvbmcAAAAAADhCSU0D7QAAAAAAEAEsAAAAAQACASwAAAABAAI4QklNBCYAAAAAAA4AAAAAAAAAAAAAP4AAADhCSU0EDQAAAAAABAAAAHg4QklNBBkAAAAAAAQAAAAeOEJJTQPzAAAAAAAJAAAAAAAAAAABADhCSU0nEAAAAAAACgABAAAAAAAAAAI4QklNA/UAAAAAAEgAL2ZmAAEAbGZmAAYAAAAAAAEAL2ZmAAEAoZmaAAYAAAAAAAEAMgAAAAEAWgAAAAYAAAAAAAEANQAAAAEALQAAAAYAAAAAAAE4QklNA/gAAAAAAHAAAP////////////////////////////8D6AAAAAD/////////////////////////////A+gAAAAA/////////////////////////////wPoAAAAAP////////////////////////////8D6AAAOEJJTQQIAAAAAAAQAAAAAQAAAkAAAAJAAAAAADhCSU0ERAAAAAAAEAAAAAIAAAJAAAACQAAAAAA4QklNBB4AAAAAAAQAAAAAOEJJTQQaAAAAAANLAAAABgAAAAAAAAAAAAAB8AAAAYYAAAALAFUAYwBsAF8AVQBfADAAMAA4ADMAYQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAABhgAAAfAAAAAAAAAAAAAAAAAA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PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4xLWMwMDEgNzkuMTQ2Mjg5OSwgMjAyMy8wNi8yNS0yMDowMTo1NSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczphdXg9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvYXV4LyIgeG1sbnM6ZXhpZkVYPSJodHRwOi8vY2lwYS5qcC9leGlmLzEuMC8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1wOlJhdGluZz0iMCIgeG1wOkNyZWF0b3JUb29sPSJEaWdpdGFsIENhbWVyYSBYLVQ0IFZlcjEuMjUiIHhtcDpNb2RpZnlEYXRlPSIyMDI1LTAxLTA0VDE0OjE5OjIzKzA1OjMwIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyNS0wMS0wNFQxNDowNDoxNyIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyNS0wMS0wNFQxNDoxOToyMyswNTozMCIgYXV4OkZ1amlSYXRpbmdBbHJlYWR5QXBwbGllZD0iVHJ1ZSIgYXV4OlNlcmlhbE51bWJlcj0iMkFRMDM2NzgiIGF1eDpMZW5zSW5mbz0iMTYwMC8xMDAgODAwMC8xMDAgNDAwLzEwMCA0MDAvMTAwIiBhdXg6TGVucz0iWEYxNi04MG1tRjQgUiBPSVMgV1IiIGF1eDpMZW5zU2VyaWFsTnVtYmVyPSIxREEwODUwNSIgZXhpZkVYOkxlbnNNb2RlbD0iWEYxNi04MG1tRjQgUiBPSVMgV1IiIGV4aWZFWDpMZW5zTWFrZT0iRlVKSUZJTE0iIHBob3Rvc2hvcDpEYXRlQ3JlYXRlZD0iMjAyNS0wMS0wNFQxNDowNDoxNyIgcGhvdG9zaG9wOkxlZ2FjeUlQVENEaWdlc3Q9IkUwMTY0QjYwMjFFMDlDMTQ5NjVDMUZBNEZDREFCQzVGIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0ic1JHQiBJRUM2MTk2Ni0yLjEiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDplYTc1M2MxNS01MmI0LTA4NDItYmE3Ny02YWNiNjQwMTVkYmUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MGY3NzA0MGQtYTdlMC03YzRiLWFmNmItZTkwYWZjYjYyYjYyIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9IjRBMzFFODFENzdBNjA2QUUwQTMzQjlDQkFCMDA4RjdBIiBkYzpmb3JtYXQ9ImltYWdlL2pwZWciPiA8cGhvdG9zaG9wOkRvY3VtZW50QW5jZXN0b3JzPiA8cmRmOkJhZz4gPHJkZjpsaT5hZG9iZTpkb2NpZDpwaG90b3Nob3A6ZDVjNmZiNjktZWZlMi00YzQyLTk1M2YtMjEwODNhZWE1NDZjPC9yZGY6bGk+IDxyZGY6bGk+dXVpZDo5NUUyQzdGRTY3NENFNDExOUNCRTg2ODZFNzgyMURFMzwvcmRmOmxpPiA8L3JkZjpCYWc+IDwvcGhvdG9zaG9wOkRvY3VtZW50QW5jZXN0b3JzPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NDAwZGU3OS01ZmJmLTNmNDYtOGUzYy00YzI2NmVhM2Y5ZjMiIHN0RXZ0OndoZW49IjIwMjUtMDEtMDRUMTQ6MTA6MTgrMDU6MzAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyNS4wIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MGY3NzA0MGQtYTdlMC03YzRiLWFmNmItZTkwYWZjYjYyYjYyIiBzdEV2dDp3aGVuPSIyMDI1LTAxLTA0VDE0OjE5OjIzKzA1OjMwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjUuMCAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDxkYzpjcmVhdG9yPiA8cmRmOlNlcT4gPHJkZjpsaT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L3JkZjpsaT4gPC9yZGY6U2VxPiA8L2RjOmNyZWF0b3I+IDxkYzpyaWdodHM+IDxyZGY6QWx0PiA8cmRmOmxpIHhtbDpsYW5nPSJ4LWRlZmF1bHQiPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvcmRmOmxpPiA8L3JkZjpBbHQ+IDwvZGM6cmlnaHRzPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+/+IMWElDQ19QUk9GSUxFAAEBAAAMSExpbm8CEAAAbW50clJHQiBYWVogB84AAgAJAAYAMQAAYWNzcE1TRlQAAAAASUVDIHNSR0IAAAAAAAAAAAAAAAAAAPbWAAEAAAAA0y1IUCAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARY3BydAAAAVAAAAAzZGVzYwAAAYQAAABsd3RwdAAAAfAAAAAUYmtwdAAAAgQAAAAUclhZWgAAAhgAAAAUZ1hZWgAAAiwAAAAUYlhZWgAAAkAAAAAUZG1uZAAAAlQAAABwZG1kZAAAAsQAAACIdnVlZAAAA0wAAACGdmlldwAAA9QAAAAkbHVtaQAAA/gAAAAUbWVhcwAABAwAAAAkdGVjaAAABDAAAAAMclRSQwAABDwAAAgMZ1RSQwAABDwAAAgMYlRSQwAABDwAAAgMdGV4dAAAAABDb3B5cmlnaHQgKGMpIDE5OTggSGV3bGV0dC1QYWNrYXJkIENvbXBhbnkAAGRlc2MAAAAAAAAAEnNSR0IgSUVDNjE5NjYtMi4xAAAAAAAAAAAAAAASc1JHQiBJRUM2MTk2Ni0yLjEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAADzUQABAAAAARbMWFlaIAAAAAAAAAAAAAAAAAAAAABYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAA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" alt="Gavrish B" class="about-photo"/>
+        </div>
+        <div class="about-tag" style="position:absolute;bottom:-20px;right:-20px;">
+          <span class="about-tag-val">2025</span>
+          <span class="about-tag-key">VIT Chennai</span>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="about-content">
+        <p class="about-intro reveal">
+          Hi, I'm <span>Gavrish B</span> — a Data Analyst &amp; AI/ML Engineer
+          graduating from VIT Chennai with a B.Tech in AI &amp; ML (CGPA 7.92).
+        </p>
+        <p class="about-body reveal">
+          I build end-to-end financial data pipelines, multi-source reconciliation tools,
+          and machine learning models that solve real business problems. My work spans
+          asset management data workflows, NLP-powered sales analytics, and computer vision
+          systems — all with a focus on production-quality, well-tested code.
+          <br/><br/>
+          Currently seeking Data Analyst roles in financial services and asset management,
+          with experience at Feynn Labs, Acmegrade, and SystemTron across ML and data engineering.
+        </p>
+
+        <div class="about-chips reveal">
+          <span class="chip">Python</span>
+          <span class="chip">SQL · MySQL</span>
+          <span class="chip">Power BI</span>
+          <span class="chip">ETL Pipelines</span>
+          <span class="chip">Reconciliation</span>
+          <span class="chip">TensorFlow</span>
+          <span class="chip">Azure AI</span>
+          <span class="chip">NLP</span>
+          <span class="chip">Pandas · NumPy</span>
+          <span class="chip">Tableau</span>
+        </div>
+
+        <div class="about-links reveal">
+          <a href="https://github.com/Fantasy-decrypt1803" target="_blank" class="btn btn-glow">
+            ↗ GitHub
+          </a>
+          <a href="https://linkedin.com/in/gavrish-b-401467218" target="_blank" class="btn btn-ghost">
+            LinkedIn
+          </a>
+          <a href="mailto:gavrish1829@gmail.com" class="btn btn-ghost">
+            Email Me
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ── Stats ─────────────────────────────────────────────────── -->
-<div class="container">
-  <div class="stats-bar reveal" id="statsBar">
-    <div class="stat-cell">
-      <span class="stat-num" id="statRepos">—</span>
-      <span class="stat-label">Repositories</span>
-    </div>
-    <div class="stat-cell">
-      <span class="stat-num" id="statStars">—</span>
-      <span class="stat-label">Total Stars</span>
-    </div>
-    <div class="stat-cell">
-      <span class="stat-num" id="statCommits">4</span>
-      <span class="stat-label">Projects Built</span>
-    </div>
-    <div class="stat-cell">
-      <span class="stat-num">3</span>
-      <span class="stat-label">Certifications</span>
-    </div>
-  </div>
-</div>
-
-<!-- ── Projects ──────────────────────────────────────────────── -->
-<section id="projects">
+<!-- ════════════════════════════════════════════════════════════
+     SKILLS
+════════════════════════════════════════════════════════════ -->
+<section class="section" id="skills">
   <div class="container">
-    <p class="section-label reveal">Selected Work</p>
-    <h2 class="section-title reveal">GitHub Projects</h2>
-    <p class="section-sub reveal">
-      Production-grade financial data engineering projects aligned to asset management workflows.
-    </p>
 
-    <div class="projects-grid reveal" id="projectsGrid">
-      <!-- filled by JS -->
+    <p class="sec-label reveal">02 — Technical Stack</p>
+    <h2 class="sec-title reveal">Skills &amp; <em>Tools</em></h2>
+
+    <!-- Tabs -->
+    <div class="skills-tabs reveal">
+      <button class="skill-tab active" data-tab="data">Data Engineering</button>
+      <button class="skill-tab" data-tab="ml">ML &amp; AI</button>
+      <button class="skill-tab" data-tab="bi">Analytics &amp; BI</button>
     </div>
-  </div>
-</section>
 
-<!-- ── Skills ────────────────────────────────────────────────── -->
-<section id="skills">
-  <div class="container">
-    <p class="section-label reveal">Technical Stack</p>
-    <h2 class="section-title reveal">Skills</h2>
+    <!-- Data Engineering Panel -->
+    <div class="skill-panel active" id="tab-data">
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🐍</div>
+        <div class="skill-card-name">Python</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:92%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span>
+          <span class="skill-tag">SQLAlchemy</span><span class="skill-tag">yfinance</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🗄️</div>
+        <div class="skill-card-name">SQL · MySQL</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:80%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Window Functions</span><span class="skill-tag">CTEs</span>
+          <span class="skill-tag">Views</span><span class="skill-tag">Joins</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">⚙️</div>
+        <div class="skill-card-name">ETL Pipelines</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:88%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Extraction</span><span class="skill-tag">Transform</span>
+          <span class="skill-tag">SLA Logging</span><span class="skill-tag">Scheduling</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🔍</div>
+        <div class="skill-card-name">Data Reconciliation</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:90%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Multi-source</span><span class="skill-tag">Break Detection</span>
+          <span class="skill-tag">Root Cause</span><span class="skill-tag">UAT</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">✅</div>
+        <div class="skill-card-name">Data Quality &amp; UAT</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:86%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Pytest</span><span class="skill-tag">22 Test Cases</span>
+          <span class="skill-tag">Sign-off Reports</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">📊</div>
+        <div class="skill-card-name">Excel · openpyxl</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:82%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">VBA</span><span class="skill-tag">Pivot Tables</span>
+          <span class="skill-tag">Automated Reports</span>
+        </div>
+      </div>
+    </div>
 
-    <div class="skills-grid reveal">
-      <div class="skill-group">
-        <div class="skill-group-title">Data Engineering</div>
-        <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">SQL / MySQL</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">ETL Pipelines</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">SQLAlchemy</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Pandas / NumPy</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div></div>
+    <!-- ML & AI Panel -->
+    <div class="skill-panel" id="tab-ml">
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🧠</div>
+        <div class="skill-card-name">TensorFlow · Keras</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:82%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">CNN</span><span class="skill-tag">RNN</span>
+          <span class="skill-tag">Transfer Learning</span>
+        </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Analytics & BI</div>
-        <div class="skill-item"><span class="skill-name">Power BI</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Tableau</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">DAX</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Data Reconciliation</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Root Cause Analysis</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">⚗️</div>
+        <div class="skill-card-name">Scikit-learn</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:85%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Classification</span><span class="skill-tag">Regression</span>
+          <span class="skill-tag">Clustering</span>
+        </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">ML & AI</div>
-        <div class="skill-item"><span class="skill-name">TensorFlow</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Scikit-learn</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">NLP</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Azure AI</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Generative AI</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div></div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">💬</div>
+        <div class="skill-card-name">NLP</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:78%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Sentiment Analysis</span><span class="skill-tag">BERT</span>
+          <span class="skill-tag">Text Classification</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">☁️</div>
+        <div class="skill-card-name">Azure AI · Vertex AI</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:74%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Azure AI-900</span><span class="skill-tag">Gen AI</span>
+          <span class="skill-tag">Vertex AI</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">👁️</div>
+        <div class="skill-card-name">Computer Vision</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:76%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">OpenCV</span><span class="skill-tag">Object Detection</span>
+          <span class="skill-tag">Pedestrian Detection</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">✨</div>
+        <div class="skill-card-name">Generative AI</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:72%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">LLMs</span><span class="skill-tag">Prompt Engineering</span>
+          <span class="skill-tag">RAG</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BI Panel -->
+    <div class="skill-panel" id="tab-bi">
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">📈</div>
+        <div class="skill-card-name">Power BI</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:84%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">DAX</span><span class="skill-tag">5-Page Dashboards</span>
+          <span class="skill-tag">Slicers</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">📉</div>
+        <div class="skill-card-name">Tableau</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:76%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Dashboards</span><span class="skill-tag">Story Points</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🏦</div>
+        <div class="skill-card-name">Financial Analytics</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:88%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Returns</span><span class="skill-tag">Volatility</span>
+          <span class="skill-tag">RSI</span><span class="skill-tag">Drawdown</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🔢</div>
+        <div class="skill-card-name">Statistical Analysis</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:80%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Hypothesis Testing</span><span class="skill-tag">Correlation</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🔗</div>
+        <div class="skill-card-name">Data Modelling</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:82%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Star Schema</span><span class="skill-tag">Dim/Fact Tables</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">📌</div>
+        <div class="skill-card-name">Benchmark Data</div>
+        <div class="skill-card-level"><div class="skill-card-bar" style="width:78%"></div></div>
+        <div class="skill-card-tags">
+          <span class="skill-tag">Index Lifecycle</span><span class="skill-tag">Bloomberg</span>
+          <span class="skill-tag">Static Data</span>
+        </div>
       </div>
     </div>
 
     <!-- Certifications -->
-    <div class="certs-row reveal" style="margin-top: 2px;">
-      <div class="cert-card">
-        <div class="cert-icon">☁️</div>
+    <p class="sec-label reveal" style="margin-top:64px;">Certifications</p>
+    <div class="certs-grid">
+      <a class="cert-card reveal" href="https://www.credly.com/badges/search?query=azure+ai+fundamentals" target="_blank">
+        <div class="cert-icon-wrap">☁️</div>
         <div>
           <div class="cert-name">Azure AI Fundamentals</div>
           <div class="cert-meta">Microsoft · AI-900 · Jul 2024</div>
         </div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🧠</div>
+        <div class="cert-link-icon">↗</div>
+      </a>
+      <a class="cert-card reveal" href="https://www.udemy.com/certificate/tensorflow-developer" target="_blank">
+        <div class="cert-icon-wrap">🧠</div>
         <div>
           <div class="cert-name">TensorFlow Developer</div>
-          <div class="cert-meta">ZTM · Apr 2024</div>
+          <div class="cert-meta">Zero to Mastery · Apr 2024</div>
         </div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">✦</div>
+        <div class="cert-link-icon">↗</div>
+      </a>
+      <a class="cert-card reveal" href="https://cloud.google.com/vertex-ai" target="_blank">
+        <div class="cert-icon-wrap">✦</div>
         <div>
-          <div class="cert-name">Generative AI on Vertex AI</div>
+          <div class="cert-name">Generative AI — Vertex AI</div>
           <div class="cert-meta">Google Cloud · Jul 2024</div>
         </div>
-      </div>
+        <div class="cert-link-icon">↗</div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PROJECTS
+════════════════════════════════════════════════════════════ -->
+<section class="section" id="projects">
+  <div class="container">
+
+    <p class="sec-label reveal">03 — Work</p>
+    <h2 class="sec-title reveal">Featured <em>Projects</em></h2>
+
+    <div class="projects-filter reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="finance">Finance & Data</button>
+      <button class="filter-btn" data-filter="ml">ML & AI</button>
+    </div>
+
+    <div class="projects-list">
+
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/financial-index-etl" target="_blank" data-cat="finance">
+        <div class="project-num">01</div>
+        <div class="project-info">
+          <div class="project-title">Financial Index ETL Pipeline</div>
+          <div class="project-desc">End-to-end ETL pulling 2 years of data for 7 global indices into MySQL. Automated SLA logging, reconciliation break detection, 4-sheet Excel report, 6 analytical SQL views.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">MySQL</span>
+            <span class="project-tag">SQLAlchemy</span><span class="project-tag">Pandas</span>
+            <span class="project-tag">Yahoo Finance API</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-finance">Finance</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/financial-recon-tool" target="_blank" data-cat="finance">
+        <div class="project-num">02</div>
+        <div class="project-info">
+          <div class="project-title">Multi-Source Reconciliation &amp; Root Cause Tool</div>
+          <div class="project-desc">Compares Yahoo Finance vs Alpha Vantage for 15 assets. Detects 6 break types, generates investigation playbooks, and produces colour-coded Excel sign-off reports with pattern insights.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">Pandas</span>
+            <span class="project-tag">SQL</span><span class="project-tag">Pytest</span>
+            <span class="project-tag">Root Cause Analysis</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-finance">Finance</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/asset-class-dashboard" target="_blank" data-cat="finance">
+        <div class="project-num">03</div>
+        <div class="project-info">
+          <div class="project-title">Asset Class Analytics Dashboard</div>
+          <div class="project-desc">5-page Power BI dashboard tracking 15 instruments across Equity, Bond, Commodity, Crypto, and FX. RSI signals, drawdown, SMA overlays, base-100 normalised comparison, and 7 SQL views.</div>
+          <div class="project-stack">
+            <span class="project-tag">Power BI</span><span class="project-tag">DAX</span>
+            <span class="project-tag">MySQL</span><span class="project-tag">Python</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-finance">Finance</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/uat-test-framework" target="_blank" data-cat="finance">
+        <div class="project-num">04</div>
+        <div class="project-info">
+          <div class="project-title">UAT Test Framework for Data Pipelines</div>
+          <div class="project-desc">22-test automated UAT framework gating staging → production promotion. 6 quality dimensions (completeness, accuracy, timeliness, format, integrity, regression). Excel sign-off report with APPROVED/BLOCKED badge.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">Pytest</span>
+            <span class="project-tag">Pandas</span><span class="project-tag">Data Quality</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-finance">Finance</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803" target="_blank" data-cat="ml">
+        <div class="project-num">05</div>
+        <div class="project-info">
+          <div class="project-title">NLP-Powered Sales Conversion Analyser</div>
+          <div class="project-desc">Sentiment analysis on sales call transcripts using BERT fine-tuning. Achieved 20% uplift in conversion rate prediction accuracy for Feynn Labs. Automated report generation reduced analyst time by 25%.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">BERT</span>
+            <span class="project-tag">NLP</span><span class="project-tag">TensorFlow</span>
+            <span class="project-tag">Scikit-learn</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-ml">ML · AI</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803" target="_blank" data-cat="ml">
+        <div class="project-num">06</div>
+        <div class="project-info">
+          <div class="project-title">Pedestrian Detection System</div>
+          <div class="project-desc">Real-time pedestrian detection using YOLOv5 and OpenCV. Deployed at SystemTron with 90% RF accuracy and 83% neural network accuracy. Used for smart city safety monitoring applications.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">YOLOv5</span>
+            <span class="project-tag">OpenCV</span><span class="project-tag">Computer Vision</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-ml">ML · AI</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
 
-<!-- ── Contact ───────────────────────────────────────────────── -->
-<section id="contact" class="contact-section">
+<!-- ════════════════════════════════════════════════════════════
+     EXPERIENCE
+════════════════════════════════════════════════════════════ -->
+<section class="section" id="experience">
   <div class="container">
-    <p class="section-label reveal" style="justify-content:center;">Get In Touch</p>
-    <h2 class="contact-big reveal">
-      Let's work<br/><span class="dim">together.</span>
-    </h2>
-    <p style="color:var(--muted); max-width:400px; margin:0 auto;" class="reveal">
-      Open to Data Analyst roles in financial services and asset management. Based in India, open to Pune.
-    </p>
-    <div class="contact-links reveal">
-      <a href="mailto:gavrish1829@gmail.com" class="btn btn-primary">Send Email →</a>
-      <a href="https://linkedin.com/in/gavrish-b-401467218" target="_blank" class="btn btn-outline">LinkedIn</a>
-      <a href="https://github.com/Fantasy-decrypt1803" target="_blank" class="btn btn-outline">GitHub</a>
+
+    <p class="sec-label reveal">04 — Career</p>
+    <h2 class="sec-title reveal">Work <em>Experience</em></h2>
+
+    <div class="exp-timeline">
+
+      <!-- Feynn Labs -->
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-period">Jun 2023 – Aug 2023</div>
+        <div class="exp-role">Machine Learning Intern</div>
+        <div class="exp-company">
+          <span>Feynn Labs</span>
+          <span class="exp-company-dot"></span>
+          <span style="font-size:12px;font-family:var(--fmono);color:var(--muted);">Remote</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built NLP pipeline using BERT fine-tuning on sales call transcripts, achieving <strong style="color:var(--text)">20% uplift</strong> in conversion rate prediction accuracy.</li>
+          <li>Automated weekly analytics reporting, cutting manual analyst processing time by <strong style="color:var(--text)">25%</strong> through Python scripting and scheduled job execution.</li>
+          <li>Designed and implemented sentiment analysis module classifying customer intent across 3 categories with 84% accuracy on held-out test set.</li>
+          <li>Collaborated with 4-person cross-functional team to deploy model to staging environment, writing documentation and runbooks for handoff.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span><span class="exp-tag">BERT</span>
+          <span class="exp-tag">NLP</span><span class="exp-tag">TensorFlow</span>
+          <span class="exp-tag">Sentiment Analysis</span><span class="exp-tag">Pandas</span>
+        </div>
+      </div>
+
+      <!-- SystemTron -->
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-period">Sep 2023 – Oct 2023</div>
+        <div class="exp-role">ML & Data Engineering Intern</div>
+        <div class="exp-company">
+          <span>SystemTron</span>
+          <span class="exp-company-dot"></span>
+          <span style="font-size:12px;font-family:var(--fmono);color:var(--muted);">On-site</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed real-time pedestrian detection system using YOLOv5 and OpenCV achieving <strong style="color:var(--text)">90% accuracy</strong> via Random Forest ensemble.</li>
+          <li>Built and compared neural network vs traditional ML pipeline — neural network achieved <strong style="color:var(--text)">83% accuracy</strong> on validation set with 40% faster inference.</li>
+          <li>Processed and annotated 5,000+ image dataset, implementing data augmentation pipeline that improved model generalisation by 12%.</li>
+          <li>Delivered live demo to technical stakeholders and wrote detailed model card documentation for production handoff.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span><span class="exp-tag">YOLOv5</span>
+          <span class="exp-tag">OpenCV</span><span class="exp-tag">Random Forest</span>
+          <span class="exp-tag">Computer Vision</span><span class="exp-tag">scikit-learn</span>
+        </div>
+      </div>
+
+      <!-- Acmegrade -->
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-period">Jul 2022 – Sep 2022</div>
+        <div class="exp-role">Machine Learning Intern</div>
+        <div class="exp-company">
+          <span>Acmegrade</span>
+          <span class="exp-company-dot"></span>
+          <span style="font-size:12px;font-family:var(--fmono);color:var(--muted);">Remote</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Implemented supervised learning models for agricultural yield prediction using multi-source time series data from weather APIs and crop sensors.</li>
+          <li>Performed end-to-end data wrangling across 3 disparate data sources — applied quality checks, documented SOPs, and delivered clean feature-engineered dataset.</li>
+          <li>Ran exploratory data analysis and produced visualisation report that identified 3 key correlates of crop yield variance, presented to team lead.</li>
+          <li>Wrote modular, well-commented Python code following team coding standards — all code reviewed and merged without rework.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span><span class="exp-tag">Scikit-learn</span>
+          <span class="exp-tag">Pandas</span><span class="exp-tag">EDA</span>
+          <span class="exp-tag">Time Series</span><span class="exp-tag">Data Quality</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════════════════════ -->
+<section class="section" id="contact">
+  <div class="container">
+
+    <p class="sec-label reveal" style="justify-content:center; text-align:center;">05 — Let's Talk</p>
+
+    <div class="contact-hero">
+      <h2 class="contact-big reveal">
+        Open to<br/>
+        <span class="stroke">Opportunities</span>
+      </h2>
+      <p class="contact-sub reveal">
+        Looking for Data Analyst, ML Engineer, or BI Analyst roles in
+        financial services, asset management, or tech. Based in India — open to Pune and remote.
+      </p>
+      <div class="contact-cards reveal">
+        <a href="mailto:gavrish1829@gmail.com" class="contact-card">
+          <div class="contact-card-icon">✉️</div>
+          <div class="contact-card-label">Email</div>
+          <div class="contact-card-val">gavrish1829@gmail.com</div>
+        </a>
+        <a href="https://linkedin.com/in/gavrish-b-401467218" target="_blank" class="contact-card">
+          <div class="contact-card-icon">💼</div>
+          <div class="contact-card-label">LinkedIn</div>
+          <div class="contact-card-val">gavrish-b-401467218</div>
+        </a>
+        <a href="https://github.com/Fantasy-decrypt1803" target="_blank" class="contact-card">
+          <div class="contact-card-icon">⌨️</div>
+          <div class="contact-card-label">GitHub</div>
+          <div class="contact-card-val">Fantasy-decrypt1803</div>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ── Footer ────────────────────────────────────────────────── -->
 <footer>
-  <div class="container">
-    <div class="footer-inner">
-      <span class="footer-copy">© 2025 Gavrish B · B.Tech AI &amp; ML, VIT Chennai</span>
-      <span class="footer-copy">gavrish1829@gmail.com · +91 97870 21829</span>
-    </div>
-  </div>
+  <span class="footer-copy">© 2025 Gavrish B · B.Tech AI &amp; ML, VIT Chennai · CGPA 7.92</span>
+  <span class="footer-copy">+91 97870 21829</span>
 </footer>
 
 <script>
-// ── Project data ─────────────────────────────────────────────
-const PROJECTS = [
-  {
-    num: "01",
-    badge: "ETL",
-    badgeClass: "",
-    title: "Financial Index ETL Pipeline",
-    desc: "End-to-end ETL pipeline pulling 2 years of data for 7 global indices. Automated SLA logging, reconciliation break detection, and 6 MySQL analytical views powering Power BI dashboards.",
-    tags: ["Python", "MySQL", "SQLAlchemy", "Pandas", "Yahoo Finance API", "openpyxl"],
-    stars: "—", forks: "—",
-    url: "https://github.com/Fantasy-decrypt1803/financial-index-etl",
-    repoKey: "financial-index-etl"
-  },
-  {
-    num: "02",
-    badge: "Reconciliation",
-    badgeClass: "badge-green",
-    title: "Multi-Source Recon & Root Cause Tool",
-    desc: "Compares two independent data vendor feeds for 15 assets, classifies 6 break types (PRICE_BREAK, MISSING, STALE, VOLUME), generates investigation playbooks, and produces Excel sign-off reports.",
-    tags: ["Python", "Pandas", "SQL", "openpyxl", "Pytest", "Root Cause Analysis"],
-    stars: "—", forks: "—",
-    url: "https://github.com/Fantasy-decrypt1803/financial-recon-tool",
-    repoKey: "financial-recon-tool"
-  },
-  {
-    num: "03",
-    badge: "Power BI",
-    badgeClass: "badge-gold",
-    title: "Asset Class Analytics Dashboard",
-    desc: "5-page Power BI dashboard tracking 15 instruments across Equity, Bond, Commodity, Crypto, and FX. Covers returns, RSI, drawdown, volatility, and base-100 normalised comparison with 7 SQL analytical views.",
-    tags: ["Python", "Power BI", "MySQL", "DAX", "Yahoo Finance API", "7 SQL Views"],
-    stars: "—", forks: "—",
-    url: "https://github.com/Fantasy-decrypt1803/asset-class-dashboard",
-    repoKey: "asset-class-dashboard"
-  },
-  {
-    num: "04",
-    badge: "UAT",
-    badgeClass: "badge-green",
-    title: "UAT Test Framework for Data Pipelines",
-    desc: "22-test automated UAT framework gating staging → production promotion. 6 quality dimensions. Configurable defect scenarios. Excel sign-off report with APPROVED / BLOCKED decision badge.",
-    tags: ["Python", "Pytest", "Pandas", "openpyxl", "Data Quality", "Pipeline Testing"],
-    stars: "—", forks: "—",
-    url: "https://github.com/Fantasy-decrypt1803/uat-test-framework",
-    repoKey: "uat-test-framework"
-  }
-];
+// ── Custom cursor ─────────────────────────────────────────────
+const dot  = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
 
-// ── Render projects ───────────────────────────────────────────
-function renderProjects(repoData) {
-  const grid = document.getElementById('projectsGrid');
-  grid.innerHTML = PROJECTS.map(p => {
-    const repo = repoData[p.repoKey] || {};
-    const stars = repo.stargazers_count ?? '—';
-    const forks = repo.forks_count ?? '—';
-    return `
-    <a class="project-card" href="${p.url}" target="_blank">
-      <div class="project-num">
-        ${p.num}
-        <span class="project-badge ${p.badgeClass}">${p.badge}</span>
-      </div>
-      <div class="project-title">${p.title}</div>
-      <div class="project-desc">${p.desc}</div>
-      <div class="project-tags">
-        ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
-      </div>
-      <div class="project-meta">
-        <span>★ ${stars}</span>
-        <span>⑂ ${forks}</span>
-        <span style="color:var(--green)">● Live</span>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>`;
-  }).join('');
-}
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left  = mx + 'px';
+  dot.style.top   = my + 'px';
+});
 
-// ── Fetch GitHub data ─────────────────────────────────────────
-async function fetchGitHub() {
-  const USERNAME = 'Fantasy-decrypt1803';
-  try {
-    const [userRes, reposRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${USERNAME}`),
-      fetch(`https://api.github.com/users/${USERNAME}/repos?per_page=100`)
-    ]);
+(function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) *.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animateRing);
+})();
 
-    if (userRes.ok) {
-      const user = await userRes.json();
-      document.getElementById('statRepos').textContent = user.public_repos ?? '—';
-    }
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    dot.style.transform  = 'translate(-50%,-50%) scale(2.5)';
+    ring.style.transform = 'translate(-50%,-50%) scale(1.6)';
+    ring.style.opacity   = '0.6';
+  });
+  el.addEventListener('mouseleave', () => {
+    dot.style.transform  = 'translate(-50%,-50%) scale(1)';
+    ring.style.transform = 'translate(-50%,-50%) scale(1)';
+    ring.style.opacity   = '1';
+  });
+});
 
-    const repoData = {};
-    if (reposRes.ok) {
-      const repos = await reposRes.json();
-      let totalStars = 0;
-      repos.forEach(r => {
-        totalStars += r.stargazers_count || 0;
-        repoData[r.name] = r;
-      });
-      document.getElementById('statStars').textContent = totalStars;
-    }
+// ── Scroll progress bar ───────────────────────────────────────
+const bar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  bar.style.transform = `scaleX(${p})`;
+});
 
-    renderProjects(repoData);
-  } catch(e) {
-    renderProjects({});
-  }
-}
+// ── Active nav on scroll ──────────────────────────────────────
+const sections  = document.querySelectorAll('.section');
+const navLinks  = document.querySelectorAll('.nav-link');
 
-// ── Scroll reveal ─────────────────────────────────────────────
-const observer = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
     if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 80);
-      observer.unobserve(e.target);
+      const id = e.target.id;
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.4 });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+sections.forEach(s => sectionObserver.observe(s));
 
-// ── Init ──────────────────────────────────────────────────────
-renderProjects({});
+// ── Scroll reveal ─────────────────────────────────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── Skill tabs ────────────────────────────────────────────────
+document.querySelectorAll('.skill-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.skill-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.skill-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panel = document.getElementById('tab-' + tab.dataset.tab);
+    panel.classList.add('active');
+    // re-trigger bar animations
+    panel.querySelectorAll('.skill-card-bar').forEach(b => {
+      b.style.animation = 'none';
+      b.offsetHeight;
+      b.style.animation = '';
+    });
+    // re-trigger reveals
+    panel.querySelectorAll('.reveal').forEach(el => {
+      el.classList.remove('visible');
+      setTimeout(() => el.classList.add('visible'), 50);
+    });
+  });
+});
+
+// ── Project filter ────────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.project-row').forEach(row => {
+      const match = filter === 'all' || row.dataset.cat === filter;
+      row.style.display  = match ? 'grid' : 'none';
+      row.style.opacity  = '0';
+      row.style.transform = 'translateX(-20px)';
+      if (match) {
+        setTimeout(() => {
+          row.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          row.style.opacity  = '1';
+          row.style.transform = 'translateX(0)';
+        }, 50);
+      }
+    });
+  });
+});
+
+// ── GitHub API live stats ─────────────────────────────────────
+async function fetchGitHub() {
+  try {
+    const r = await fetch('https://api.github.com/users/Fantasy-decrypt1803');
+    if (r.ok) {
+      const u = await r.json();
+      document.getElementById('ghRepos').textContent = u.public_repos ?? '—';
+      document.getElementById('ghFollowers').textContent = u.followers ?? '—';
+    }
+    const r2 = await fetch('https://api.github.com/users/Fantasy-decrypt1803/repos?per_page=100');
+    if (r2.ok) {
+      const repos = await r2.json();
+      const stars = repos.reduce((s, r) => s + (r.stargazers_count||0), 0);
+      document.getElementById('ghStars').textContent = stars;
+    }
+  } catch(e) {}
+}
 fetchGitHub();
+
 </script>
+
 </body>
 </html>

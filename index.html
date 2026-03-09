@@ -1379,4 +1379,17 @@ async function fetchGitHub() {
       document.getElementById('ghRepos').textContent = u.public_repos ?? '—';
       document.getElementById('ghFollowers').textContent = u.followers ?? '—';
     }
-    const r2 = await fetch('https://api.github.com/users/Fantasy-de
+        const r2 = await fetch('https://api.github.com/users/Fantasy-decrypt1803/repos?per_page=100');
+    if (r2.ok) {
+      const repos = await r2.json();
+      const stars = repos.reduce((s, r) => s + (r.stargazers_count||0), 0);
+      document.getElementById('ghStars').textContent = stars;
+    }
+  } catch(e) {}
+}
+fetchGitHub();
+
+</script>
+
+</body>
+</html>

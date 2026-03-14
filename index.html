@@ -1022,19 +1022,57 @@ footer {
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="finance">Finance & Data</button>
       <button class="filter-btn" data-filter="ml">ML & AI</button>
+      <button class="filter-btn" data-filter="cv">Computer Vision</button>
     </div>
 
     <div class="projects-list">
 
-      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/financial_etl_project" target="_blank" data-cat="finance">
+      <!-- 01 ML Platform -->
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/ML-Platform-AutoML-Model-Registry" target="_blank" data-cat="ml">
         <div class="project-num">01</div>
         <div class="project-info">
+          <div class="project-title">ML Platform — AutoML + Model Registry</div>
+          <div class="project-desc">Production-grade MLOps platform built from scratch. TPE-based AutoML engine across 6 algorithm families — 50 trials in under 3 minutes. MLflow-inspired Model Registry with semantic versioning, champion/challenger gates, SHA256 integrity checks, and PSI/KL/KS drift detection. 36/36 tests passing.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">Scikit-learn</span>
+            <span class="project-tag">MLflow</span><span class="project-tag">Pytest</span>
+            <span class="project-tag">Bayesian Optimisation</span><span class="project-tag">Feature Store</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-ml">ML · AI</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- 02 RAG Research Assistant -->
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/Rag-Research-Assistant" target="_blank" data-cat="ml">
+        <div class="project-num">02</div>
+        <div class="project-info">
+          <div class="project-title">RAG-Powered Research Assistant</div>
+          <div class="project-desc">Hybrid retrieval pipeline combining dense FAISS vector search with sparse BM25, fused via Reciprocal Rank Fusion for improved recall. FastAPI service with streaming, batch indexing, and source-grounded generation with citation extraction. Achieves 0.70+ confidence and sub-2s response time.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">FAISS</span>
+            <span class="project-tag">BM25</span><span class="project-tag">FastAPI</span>
+            <span class="project-tag">HuggingFace</span><span class="project-tag">LangChain</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-ml">ML · AI</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- 03 Financial ETL -->
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/financial_etl_project" target="_blank" data-cat="finance">
+        <div class="project-num">03</div>
+        <div class="project-info">
           <div class="project-title">Financial Index ETL Pipeline</div>
-          <div class="project-desc">End-to-end ETL pulling 2 years of data for 7 global indices into MySQL. Automated SLA logging, reconciliation break detection, 4-sheet Excel report, 6 analytical SQL views.</div>
+          <div class="project-desc">End-to-end ETL pipeline ingesting 2 years of OHLCV market data across 7 global indices (~5,000+ daily records). 5 automated data quality checks, SLA breach logging, upsert logic, 6 analytical SQL views powering Power BI dashboards, and a 4-sheet Excel reconciliation report per run.</div>
           <div class="project-stack">
             <span class="project-tag">Python</span><span class="project-tag">MySQL</span>
             <span class="project-tag">SQLAlchemy</span><span class="project-tag">Pandas</span>
-            <span class="project-tag">Yahoo Finance API</span>
+            <span class="project-tag">Yahoo Finance API</span><span class="project-tag">Power BI</span>
           </div>
         </div>
         <div class="project-badge-wrap">
@@ -1043,15 +1081,16 @@ footer {
         </div>
       </a>
 
-      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/financial-recon-tool" target="_blank" data-cat="finance">
-        <div class="project-num">02</div>
+      <!-- 04 Reconciliation Tool -->
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/Multi-Source-Reconciliation-Tool" target="_blank" data-cat="finance">
+        <div class="project-num">04</div>
         <div class="project-info">
-          <div class="project-title">Multi-Source Reconciliation &amp; Root Cause Tool</div>
-          <div class="project-desc">Compares Yahoo Finance vs Alpha Vantage for 15 assets. Detects 6 break types, generates investigation playbooks, and produces colour-coded Excel sign-off reports with pattern insights.</div>
+          <div class="project-title">Multi-Source Reconciliation &amp; Root Cause Analysis Tool</div>
+          <div class="project-desc">Data reconciliation engine cross-validating two vendor feeds across 15 financial assets via outer join logic. Categorises 6 break types (PRICE_BREAK, MISSING, STALE, VOLUME), generates automated investigation playbooks, and delivers a 5-sheet colour-coded Excel audit report. 10 Pytest tests, 100% pass rate.</div>
           <div class="project-stack">
             <span class="project-tag">Python</span><span class="project-tag">Pandas</span>
             <span class="project-tag">SQL</span><span class="project-tag">Pytest</span>
-            <span class="project-tag">Root Cause Analysis</span>
+            <span class="project-tag">openpyxl</span><span class="project-tag">Root Cause Analysis</span>
           </div>
         </div>
         <div class="project-badge-wrap">
@@ -1060,30 +1099,88 @@ footer {
         </div>
       </a>
 
-      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/asset-class-dashboard" target="_blank" data-cat="finance">
-        <div class="project-num">03</div>
+      <!-- 05 UAT Framework -->
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/UAT-Test-Framework" target="_blank" data-cat="finance">
+        <div class="project-num">05</div>
+        <div class="project-info">
+          <div class="project-title">UAT Test Framework for Financial Data Pipelines</div>
+          <div class="project-desc">22-test automated UAT framework gating staging → production promotion across 6 quality dimensions: completeness, accuracy, timeliness, format, integrity, and regression. 6 defect injection scenarios simulate production failures. Outputs a 4-sheet Excel sign-off report with APPROVED/BLOCKED decision badges.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">Pytest</span>
+            <span class="project-tag">Pandas</span><span class="project-tag">openpyxl</span>
+            <span class="project-tag">Data Quality</span><span class="project-tag">UAT</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-finance">Finance</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- 06 Resume Strength Analyser -->
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/resume_strength-analyser" target="_blank" data-cat="ml">
+        <div class="project-num">06</div>
+        <div class="project-info">
+          <div class="project-title">Resume Strength Analyser</div>
+          <div class="project-desc">NLP-powered tool that scores resumes against job descriptions using keyword extraction, semantic similarity, and ATS compatibility checks. Provides section-by-section feedback with actionable improvement suggestions and a ranked score out of 100.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">NLP</span>
+            <span class="project-tag">BERT</span><span class="project-tag">Scikit-learn</span>
+            <span class="project-tag">Streamlit</span><span class="project-tag">spaCy</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-ml">ML · AI</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- 07 Yield Prediction -->
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/Yeild_Prediction" target="_blank" data-cat="ml">
+        <div class="project-num">07</div>
+        <div class="project-info">
+          <div class="project-title">Yield Prediction with Sentinel Imagery</div>
+          <div class="project-desc">Hybrid yield prediction model integrating Sentinel-1 SAR and Sentinel-2 optical satellite data to analyse soil moisture and NDVI vegetation indices for precision agriculture. Spiking Neural Network (SNN) built on neuromorphic computing principles for efficient spatio-temporal learning, achieving 80% prediction accuracy.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">SNN</span>
+            <span class="project-tag">Sentinel-1/2</span><span class="project-tag">NDVI</span>
+            <span class="project-tag">NumPy</span><span class="project-tag">Remote Sensing</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-ml">ML · AI</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- 08 Cat vs Dog -->
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/Cat-vs-Dog-Classifier" target="_blank" data-cat="cv">
+        <div class="project-num">08</div>
+        <div class="project-info">
+          <div class="project-title">Cat vs Dog Classifier</div>
+          <div class="project-desc">Binary image classification system comparing neural network vs traditional ML pipelines. Neural network achieved 83% validation accuracy with 40% faster inference. Built on 5,000+ annotated images with a custom data augmentation pipeline improving generalisation by 12%.</div>
+          <div class="project-stack">
+            <span class="project-tag">Python</span><span class="project-tag">TensorFlow</span>
+            <span class="project-tag">CNN</span><span class="project-tag">OpenCV</span>
+            <span class="project-tag">Scikit-learn</span><span class="project-tag">Data Augmentation</span>
+          </div>
+        </div>
+        <div class="project-badge-wrap">
+          <span class="project-type-badge badge-ml">Computer Vision</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- 09 Asset Dashboard -->
+      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/Asset-Class-Analytics-Dashboard" target="_blank" data-cat="finance">
+        <div class="project-num">09</div>
         <div class="project-info">
           <div class="project-title">Asset Class Analytics Dashboard</div>
-          <div class="project-desc">5-page Power BI dashboard tracking 15 instruments across Equity, Bond, Commodity, Crypto, and FX. RSI signals, drawdown, SMA overlays, base-100 normalised comparison, and 7 SQL views.</div>
+          <div class="project-desc">5-page Power BI dashboard tracking 15 instruments across Equity, Bond, Commodity, Crypto, and FX asset classes. Features RSI signals, drawdown analysis, SMA overlays, base-100 normalised performance comparison, and 7 optimised SQL views for sub-10s query response.</div>
           <div class="project-stack">
             <span class="project-tag">Power BI</span><span class="project-tag">DAX</span>
             <span class="project-tag">MySQL</span><span class="project-tag">Python</span>
-          </div>
-        </div>
-        <div class="project-badge-wrap">
-          <span class="project-type-badge badge-finance">Finance</span>
-          <span class="project-arrow">↗</span>
-        </div>
-      </a>
-
-      <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803/uat-test-framework" target="_blank" data-cat="finance">
-        <div class="project-num">04</div>
-        <div class="project-info">
-          <div class="project-title">UAT Test Framework for Data Pipelines</div>
-          <div class="project-desc">22-test automated UAT framework gating staging → production promotion. 6 quality dimensions (completeness, accuracy, timeliness, format, integrity, regression). Excel sign-off report with APPROVED/BLOCKED badge.</div>
-          <div class="project-stack">
-            <span class="project-tag">Python</span><span class="project-tag">Pytest</span>
-            <span class="project-tag">Pandas</span><span class="project-tag">Data Quality</span>
+            <span class="project-tag">Financial Analytics</span>
           </div>
         </div>
         <div class="project-badge-wrap">
@@ -1093,7 +1190,7 @@ footer {
       </a>
 
       <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803" target="_blank" data-cat="ml">
-        <div class="project-num">05</div>
+        <div class="project-num">-- </div>
         <div class="project-info">
           <div class="project-title">NLP-Powered Sales Conversion Analyser</div>
           <div class="project-desc">Sentiment analysis on sales call transcripts using BERT fine-tuning. Achieved 20% uplift in conversion rate prediction accuracy for Feynn Labs. Automated report generation reduced analyst time by 25%.</div>
@@ -1110,7 +1207,7 @@ footer {
       </a>
 
       <a class="project-row reveal" href="https://github.com/Fantasy-decrypt1803" target="_blank" data-cat="ml">
-        <div class="project-num">06</div>
+        <div class="project-num">-- </div>
         <div class="project-info">
           <div class="project-title">Pedestrian Detection System</div>
           <div class="project-desc">Real-time pedestrian detection using YOLOv5 and OpenCV. Deployed at SystemTron with 90% RF accuracy and 83% neural network accuracy. Used for smart city safety monitoring applications.</div>
